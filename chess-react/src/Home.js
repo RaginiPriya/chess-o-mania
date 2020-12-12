@@ -3,7 +3,7 @@ import { Modal, Spinner, Button, Form } from 'react-bootstrap'
 import UserNavBar from './UserNavBar'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import {API_BASE_URL} from './constants'
+import { API_BASE_URL } from './constants'
 
 class Home extends Component {
     state = {
@@ -25,20 +25,20 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        fetch(API_BASE_URL+'/user', {
-                method: 'GET',
-                headers: {
-                  'Authorization': 'Bearer ' + this.props.user.token,
-                }
+        fetch(API_BASE_URL + '/user', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + this.props.user.token,
+            }
+        })
+            .then((response) => {
+                return response.json()
             })
-                .then((response) => {
-                    return response.json()
-                })
-                .then((data) => {
-                    console.log(data)
-                    this.setState({id:data.id})
-                    this.props.setUser({username: data.name, imageUrl: data.imageUrl, id: data.id})
-                })
+            .then((data) => {
+                console.log(data)
+                this.setState({ id: data.id })
+                this.props.setUser({ username: data.name, imageUrl: data.imageUrl, id: data.id })
+            })
     }
 
     playOnline = () => {
@@ -93,16 +93,16 @@ class Home extends Component {
     }
 
     showInvalid = () => {
-        this.setState({invalid: true})
+        this.setState({ invalid: true })
     }
 
     showJoin = () => {
-        this.setState({join:true})
+        this.setState({ join: true })
     }
 
     hideJoin = () => {
-        this.setState({join:false})
-        if(this.socket){
+        this.setState({ join: false })
+        if (this.socket) {
             this.socket.close()
         }
         this.props.setWs({ socket: null });
@@ -124,13 +124,13 @@ class Home extends Component {
             if (data.type && data.type === 'gameId') {
                 this.setState({ friends: true, gameId: data.gameId })
             }
-            else if(data.color) {
+            else if (data.color) {
                 this.setState({ friends: true, gameId: data.gameId, opponentName: data.opponentName, opponentImageUrl: data.opponentImageUrl, color: data.color })
             }
-            else if(data.type && data.type === 'invalid'){
-                this.setState({invalid: true})
+            else if (data.type && data.type === 'invalid') {
+                this.setState({ invalid: true })
 
-                
+
             }
             console.log(data)
         }
@@ -142,30 +142,30 @@ class Home extends Component {
     render() {
         const redirect = this.state.gameId && this.state.online ? <Redirect to={{
             pathname: '/game',
-            state: { 
-                gameId: this.state.gameId,
-                color: this.state.color,
-                opponentName: this.state.opponentName,
-                opponentImageUrl: this.state.opponentImageUrl
-            }
-        }} /> 
-        : this.state.gameId && this.state.friends ? <Redirect to={{
-            pathname: '/waitingroom',
-            state: { 
+            state: {
                 gameId: this.state.gameId,
                 color: this.state.color,
                 opponentName: this.state.opponentName,
                 opponentImageUrl: this.state.opponentImageUrl
             }
         }} />
-        : null
+            : this.state.gameId && this.state.friends ? <Redirect to={{
+                pathname: '/waitingroom',
+                state: {
+                    gameId: this.state.gameId,
+                    color: this.state.color,
+                    opponentName: this.state.opponentName,
+                    opponentImageUrl: this.state.opponentImageUrl
+                }
+            }} />
+                : null
         const className = `${this.state.invalid ? 'error' : 'hide-error'}`
         const classNameText = `${this.state.invalid ? 'error-texbox' : ''}`
         return (
-            
+
             <div>
                 {redirect}
-                
+
                 <UserNavBar />
                 <div className='leftHalf grow' onClick={this.playOnline} >
                     <div className='imageBox'>
@@ -181,10 +181,10 @@ class Home extends Component {
                     <div className='imageBox'>
                         PLAY WITH FRIENDS
                     </div>
-                    <div className='imageBox-text' style={{left:'24%'}}>
+                    <div className='imageBox-text' style={{ left: '24%' }}>
                         <div>Create or join a room and compete against your friend</div>
                         <div><Button onClick={this.createGame} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>CREATE ROOM</Button></div>
-                        
+
                         <div><Button onClick={this.showJoin} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>JOIN ROOM</Button></div>
                     </div>
                 </div>
@@ -219,10 +219,10 @@ class Home extends Component {
                     <Modal.Header closeButton hidden="true"></Modal.Header>
                     <Modal.Body>
                         <div style={{ textAlign: "center" }}>
-                        <Form.Control className={classNameText} ref={this.joinGameId} type="text" placeholder="Enter Room ID" />
-                        <div className={className}>* Invalid Room ID</div>
-                        <Button onClick={this.joinGame} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>OK</Button>
-                        <Button onClick={this.hideJoin} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>CANCEL</Button>
+                            <Form.Control className={classNameText} ref={this.joinGameId} type="text" placeholder="Enter Room ID" />
+                            <div className={className}>* Invalid Room ID</div>
+                            <Button onClick={this.joinGame} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>OK</Button>
+                            <Button onClick={this.hideJoin} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>CANCEL</Button>
                         </div>
                     </Modal.Body>
                 </Modal>
@@ -253,7 +253,7 @@ const mapDispatchToProps = (dispatch) => ({
             payload: data
         }
         return dispatch(action)
-    } 
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

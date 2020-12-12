@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 class OAuth2RedirectHandler extends Component {
 
-    getToken(){
+    getToken() {
         const query = new URLSearchParams(this.props.location.search);
         const token = query.get('token')
         return token
@@ -12,22 +12,9 @@ class OAuth2RedirectHandler extends Component {
 
     render() {
         const token = this.getToken();
-        if(token){
-            this.props.setUser({token:token})
-            // fetch(API_BASE_URL+'/user', {
-            //     method: 'GET',
-            //     headers: {
-            //       'Authorization': 'Bearer ' + token,
-            //     }
-            // })
-            //     .then((response) => {
-            //         return response.json()
-            //     })
-            //     .then((data) => {
-            //         console.log(data)
-            //         this.props.setUser({token:token, username: data.name, imageUrl: data.imageUrl, id: data.id})
-            //     })
-            
+        if (token) {
+            this.props.setUser({ token: token })
+
             return (
                 <Redirect to={{
                     pathname: '/home',
@@ -39,7 +26,7 @@ class OAuth2RedirectHandler extends Component {
                 pathname: '/'
             }} />
         }
-        
+
     }
 }
 
@@ -50,7 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
             payload: data
         }
         return dispatch(action)
-    } 
+    }
 })
 
 export default connect(null, mapDispatchToProps)(OAuth2RedirectHandler)
