@@ -3,7 +3,7 @@ import { Modal, Spinner, Button, Form } from 'react-bootstrap'
 import UserNavBar from './UserNavBar'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { API_BASE_URL } from './constants'
+import { API_BASE_URL, HOSTNAME } from './constants'
 
 class Home extends Component {
     state = {
@@ -44,7 +44,7 @@ class Home extends Component {
     playOnline = () => {
         this.setState({ waiting: true });
         console.log(this.props.user)
-        this.socket = new WebSocket("ws://localhost:8080/online/" + this.state.id) //CHANGE before commit
+        this.socket = new WebSocket('ws://'+ HOSTNAME + '/online/' + this.state.id) //CHANGE before commit
         this.socket.onopen = () => {
             console.log("socket connected");
         }
@@ -72,7 +72,7 @@ class Home extends Component {
     }
 
     createGame = () => {
-        this.socket = new WebSocket("ws://localhost:8080/create/" + this.state.id) //CHANGE before commit
+        this.socket = new WebSocket('ws://'+ HOSTNAME + '/create/' + this.state.id) //CHANGE before commit
         this.socket.onopen = () => {
             console.log("socket connected");
         }
@@ -110,7 +110,7 @@ class Home extends Component {
 
     joinGame = () => {
 
-        this.socket = new WebSocket("ws://localhost:8080/join/" + this.state.id + "/" + this.joinGameId.current.value) //CHANGE before commit
+        this.socket = new WebSocket('ws://'+ HOSTNAME + '/join/' + this.state.id + '/' + this.joinGameId.current.value) //CHANGE before commit
         this.socket.onopen = () => {
             console.log("socket connected");
         }
