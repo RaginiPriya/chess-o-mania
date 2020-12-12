@@ -1,0 +1,403 @@
+
+.Game {
+  display: flex;
+  flex-direction : column;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+  min-height: 96vh;
+  /* width: 100vh; */
+
+}
+
+#root, .App, .App>div {
+  min-height: 100vh;
+}
+
+.Square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute; 
+  /* position absolute is needed for the squares to come next to each other. 
+  Otherwise  it would all be one single column 
+  */
+}
+
+.tabcontent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+.dropdown-menu {
+  width: 250px
+}
+
+.Piece {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute; 
+}
+
+.Board{
+  height: 100vh;
+  width: 100vh;
+  position: relative;
+  border: 15px solid black;
+}
+
+body {
+  /* background-color: #312e2b; */
+  margin: 0;
+  /* padding: 0; */ 
+  background-image:  linear-gradient(to right, rgba(192, 57, 43, .2), rgba(142, 68, 173, .2));
+}
+
+.dark{
+  background-color:rgba(192, 58, 43, 0.4);
+}
+
+.light{
+  /* background-color: #F5F7E3; */
+  background-color: rgba(252, 250, 250, 0.4);
+}
+
+.navbar {
+  background-image: linear-gradient(to right, rgb(203, 53, 107), rgb(189, 63, 50));
+  padding: 0;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: black;
+}
+
+.startButton {
+  margin-bottom: 10vh;
+  width: 250px;
+  left: 40%;
+  color: white; 
+  bottom: 10vh;
+  position: fixed;
+  border: 1px solid black;
+  background-color: grey
+}
+
+.startText {
+  left: 40%;
+  color:rgb(192, 57, 43);
+  bottom: 10vh;
+  position: fixed
+}
+
+.nav-link {
+  cursor: pointer
+}
+
+.tabs > a {
+  color: black;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.my-modal .modal-content {
+  background-image: linear-gradient(to right, rgb(203, 53, 107), rgb(189, 63, 50));
+  color: white;
+  border: 4px solid white;
+  border-radius: 25px;
+}
+
+.spinner-border {
+  width: 4rem;
+  height: 4rem;
+}
+
+.waitingRoomText {
+  border: 1px solid white; 
+  text-align: center;
+  top: 50px;
+  position: relative;
+  width: 40%;
+  left: 30%
+}
+
+.left-wait {
+  left: 15px;
+  margin-top: 10px;
+  width: 48%;
+  height: 80%;
+  text-align: center;
+  position: fixed;
+  /* background-image: linear-gradient(to right, rgba(192, 57, 43, .6), rgba(142, 68, 173, .6)); */
+  /* border: 5px solid white; */
+  border: none;
+  /* border-radius: 25px; */
+  /* cursor: pointer */
+}
+
+.right-wait {
+  right:15px;
+  margin-top: 10px;
+  width: 48%;
+  height: 80%;
+  text-align: center;
+  position: fixed;
+  /* background-image: linear-gradient(to left, rgba(192, 57, 43, .6), rgba(142, 68, 173, .6)); */
+  /* border: 5px solid white; */
+  /* border-radius: 25px; */
+  /* cursor: pointer */
+}
+
+.leftHalf {
+  left: 15px;
+  margin-top: 10px;
+  width: 48%;
+  height: 80%;
+  text-align: center;
+  position: fixed;
+  background-image: linear-gradient(to right, rgba(192, 57, 43, .6), rgba(142, 68, 173, .6));
+  /* border: 5px solid white; */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer
+}
+
+.rightHalf {
+  right:15px;
+  margin-top: 10px;
+  width: 48%;
+  height: 80%;
+  text-align: center;
+  position: fixed;
+  background-image: linear-gradient(to left, rgba(192, 57, 43, .6), rgba(142, 68, 173, .6));
+  /* border: 5px solid white; */
+  border-radius: 25px;
+  cursor: pointer
+
+}
+
+.image-wait {
+  top: 30%;
+  left: 40%;
+  position: absolute;
+}
+
+.imageBox {
+  top: 30%;
+  left: 30%;
+  position: absolute;
+  color: white;
+  font-family: Helvetica;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.imageBox-text{
+  top: 40%;
+  left: 27%;
+  position: absolute;
+  color: white;
+  opacity: 0.75;
+  display: block;
+}
+
+/* .leftHalf:hover .imageBox-text {
+  display:block;
+}
+
+.rightHalf:hover .imageBox-text {
+  display:block;
+} */
+
+.imageBorder {
+  border-radius: 5px;
+  border: 10px solid rgb(192, 57, 43);
+}
+
+.playWithFriendsBackground {
+  display: flex;
+  flex-direction : column;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+  height: 93vh
+}
+
+.playWithFriendsBox {
+  height: 70vh;
+  width: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+  border-radius: 2px;
+
+}
+
+.invalidIdCloseButton {
+  background-color:black; 
+  border: 1px solid black;
+  width: 150px;
+  margin-top: 20px
+}
+
+.homePage {
+  display: inline-block;
+  position: fixed;  
+  top: 0;
+  bottom: 30vh;
+  left: 0;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  margin: auto
+}
+
+.playOnlineButton {
+  background-color: grey; 
+  border: 1px solid black;
+  margin-bottom: 10vh;
+  width: 250px
+}
+
+.playWithFriendsButton {
+  background-color: grey;
+  border: 1px solid black;
+  width: 250px
+}
+
+.timer {
+  text-align: center;
+  width: 20%;
+  position: fixed;
+  right: 5%;
+  top: 75%; 
+  border: 5px solid grey; 
+  border-radius: 5px
+}
+
+
+
+.grow:hover
+{
+  /* border: 5px solid white; */
+  /* border: none; */
+  box-shadow: 0 1px 11px rgb(1, 1, 1);
+}
+
+.border-gradient {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+}
+.border-gradient-purple {
+  border-image-source: linear-gradient(to right, rgb(203, 53, 107), rgb(189, 63, 50));
+}
+
+.site-header {
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  background: #100e17;
+  border-bottom: 1px solid #201c29;
+  
+}
+
+.custom-nav {
+  position: relative;
+    min-height: 80px;
+    width: 100%;
+  border: 1px solid white;
+  border-radius: 10px;
+  /* border-bottom: 4px solid  rgb(142, 68, 173); */
+  text-align: center;
+  /* background-color: rgba(51, 170, 51, .1)  */
+  /* background: linear-gradient(to right, rgba(218, 68, 83, .8), rgba(137, 33, 107, .8)); */
+}
+
+.user-image {
+  margin-right: 20px;
+}
+
+.floatRight {
+  margin-left: auto;
+  order: 3;
+}
+
+.history {
+  margin-left: auto;
+  order: 2;
+}
+
+.floatLeft {
+  margin-right: auto;
+  order: 1;
+  margin-left: 10px;
+}
+
+.nav-text {
+  font-family: Helvetica;
+  font-size: 35px;
+  font-weight: bold;
+  color: #4a4642;
+  margin-left: 15px;
+}
+
+.nav-text-others {
+  font-family: Helvetica;
+  font-size: 20px;
+  font-weight: bold;
+  color:#80002a;
+  margin-left: 5px;
+}
+
+.dropdown-toggle::after {
+  color: black
+}
+.btn-primary{background-image: linear-gradient(to right, rgb(192, 57, 43), rgb(142, 68, 173));border-color:white}
+
+.btn-primary:hover{background-image: linear-gradient(to right, rgb(192, 57, 43), rgb(142, 68, 173));border-color:white}
+.btn-primary:focus,.btn-primary.focus{box-shadow:0 0 0 .2rem white}
+.btn-primary.disabled,.btn-primary:disabled{background-image: linear-gradient(to right, rgb(192, 57, 43), rgb(142, 68, 173));border-color:white}
+.btn-primary:not(:disabled):not(.disabled):active,.btn-primary:not(:disabled):not(.disabled).active,.show>.btn-primary.dropdown-toggle{background-image: linear-gradient(to right, rgb(192, 57, 43), rgb(142, 68, 173));border-color:white}
+.btn-primary:not(:disabled):not(.disabled):active:focus,.btn-primary:not(:disabled):not(.disabled).active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem white}
+
+.btn-outline-primary{background-color:transparent;background-image:none;border-color:white}.btn-outline-primary:hover{color:white;background-color:white;border-color:white}
+.btn-outline-primary:focus,.btn-outline-primary.focus{box-shadow:0 0 0 .2rem white}
+.btn-outline-primary.disabled,.btn-outline-primary:disabled{background-color:transparent}
+.btn-outline-primary:not(:disabled):not(.disabled):active,.btn-outline-primary:not(:disabled):not(.disabled).active,.show>.btn-outline-primary.dropdown-toggle{background-color:white;border-color:white}
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,.btn-outline-primary:not(:disabled):not(.disabled).active:focus,.show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem white}
+
+a:hover {
+  color: white;
+}
+
+fieldset {
+  border: 5px solid #000;
+  height: 150px;
+  text-align: center;
+}
+
+.error {
+  color: black;
+}
+
+.hide-error {
+  display: none;
+}
+
+.error-texbox {
+  border-color: tomato;
+  border-width: 5px;
+}
