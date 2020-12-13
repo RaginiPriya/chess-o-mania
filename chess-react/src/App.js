@@ -12,15 +12,15 @@ import PrivateRoute from './PrivateRoute'
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Provider store={store}>
         <Router>
           <Switch>
-            <Route component={Login} exact path="/" />
-            <PrivateRoute component={Home} path="/home" />
-            <PrivateRoute component={ChessGame} path="/game" />
-            <PrivateRoute component={WaitingGameRoom} path="/waitingroom" />
-            <Route component={OAuth2RedirectHandler} path="/oauth2/redirect"></Route>
+            <Route component={Login} exact path='/' />
+            <PrivateRoute component={Home} path='/home' />
+            <PrivateRoute component={ChessGame} path='/game' />
+            <PrivateRoute component={WaitingGameRoom} path='/waitingroom' />
+            <Route component={OAuth2RedirectHandler} path='/oauth2/redirect'></Route>
           </Switch>
         </Router>
       </Provider>
@@ -29,5 +29,3 @@ function App() {
 }
 
 export default App;
-
-// only if you give exact path, others also wont get included

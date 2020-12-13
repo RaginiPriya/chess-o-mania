@@ -48,7 +48,6 @@ class ChessGame extends Component {
     }
 
     componentDidMount() {
-        // this.socket = new WebSocket("ws://localhost:8000/game/"+this.props.location.state.gameId+"?userId="+this.props.location.state.userId)
         this.socket = this.props.socket
 
         this.socket.onmessage = (input) => {
@@ -77,10 +76,10 @@ class ChessGame extends Component {
 
             }
             if (data.type === 'won') {
-                this.setState({ "won": true })
+                this.setState({ 'won': true })
             }
             else if (data.type === 'draw') {
-                this.setState({ "draw": true })
+                this.setState({ 'draw': true })
             }
 
             if (data.type === 'move') {
@@ -130,8 +129,7 @@ class ChessGame extends Component {
     }
 
     componentWillUnmount() {
-        // this.socket.send(JSON.stringify({"type":"quit",gameId: this.state.gameId}))
-        console.log("socket closed")
+        console.log('socket closed')
         this.socket.close()
     }
 
@@ -256,7 +254,7 @@ class ChessGame extends Component {
                     this.setState({ showPieceSwapModal: true, squareToSwap: square })
                 }
                 // else {
-                this.socket.send(JSON.stringify({ type: "move", gameId: this.state.gameId, fromSquare: { row: selectedSquare.row, column: selectedSquare.column }, isCastling: isCastling, toSquare: { row: square.row, column: square.column }, myColor: this.props.location.state.color }))
+                this.socket.send(JSON.stringify({ type: 'move', gameId: this.state.gameId, fromSquare: { row: selectedSquare.row, column: selectedSquare.column }, isCastling: isCastling, toSquare: { row: square.row, column: square.column }, myColor: this.props.location.state.color }))
                 // }
                 this.setState({ myTurn: false })
                 selectedPiece.selected = false
@@ -292,70 +290,59 @@ class ChessGame extends Component {
         pieces.push(piece)
         this.setState({ pieces: pieces, squares: this.state.squares });
         this.hide()
-        this.socket.send(JSON.stringify({ type: "swap", gameId: this.state.gameId, index: index, fromSquare: { row: square.row, column: square.column }, myColor: this.props.location.state.color }))
+        this.socket.send(JSON.stringify({ type: 'swap', gameId: this.state.gameId, index: index, fromSquare: { row: square.row, column: square.column }, myColor: this.props.location.state.color }))
     }
 
     render() {
         const pieceArray = this.props.location.state.color === 'white' ? [whiteQueen, whiteBishop, whiteKnight, whiteRook] :
             [blackQueen, blackBishop, blackKnight, blackRook]
 
-        const myName = this.props.location.state.player2 ? this.props.location.state.userId : 'You'
-        const opponentName = this.props.location.state.player2 ? this.props.location.state.player2 : 'Opponent'
-
         return (
             <div>
-                {this.state.redirect ? <Redirect to="/home" /> : null}
+                {this.state.redirect ? <Redirect to='/home' /> : null}
 
-                <div style={{ position: 'fixed', left: '2%', top: '2%' }}>
-                    <Image src={home} roundedCircle width="100" height="100" onClick={this.redirect} style={{ cursor: 'pointer' }} />
+                <div className='home'>
+                    <Image src={home} roundedCircle width='100' height='100' onClick={this.redirect} style={{ cursor: 'pointer' }} />
                 </div>
-                <div style={{ width: '20%', position: 'fixed', right: '2%', top: '75%' }}>
-
+                <div className='my-pieces'>
                     <fieldset>
                         <legend style={{ width: 'auto' }}>
-                            <Image src={this.props.user.imageUrl} roundedCircle width="60" height="60" /><span style={{ fontFamily: 'Rouge Script, cursive' }}>{this.props.user.username} </span>
+                            <Image src={this.props.user.imageUrl} roundedCircle width='60' height='60' /><span style={{ fontFamily: 'Rouge Script, cursive' }}>{this.props.user.username} </span>
                         </legend>
                         {this.state.myPiecesCaptured.length > 0 ?
                             (
                                 this.state.myPiecesCaptured.map((piece) => {
                                     return (
-                                        <Image src={piece} roundedCircle width="30" height="30" />
+                                        <Image src={piece} roundedCircle width='30' height='30' />
                                     )
                                 })
                             )
                             : <div style={{ color: 'rgba(1,1,1,0.3)' }}>Pieces captured</div>
                         }
-
                     </fieldset>
 
-
                 </div>
-                <div style={{ width: '20%', position: 'fixed', right: '2%', top: '5%' }}>
-
+                <div className='opponent-pieces'>
                     <fieldset>
                         <legend style={{ width: 'auto' }}>
-                            <Image src={this.props.location.state.opponentImageUrl} roundedCircle width="60" height="60" /><span style={{ fontFamily: 'Rouge Script, cursive' }}>{this.props.location.state.opponentName} </span>
+                            <Image src={this.props.location.state.opponentImageUrl} roundedCircle width='60' height='60' /><span style={{ fontFamily: 'Rouge Script, cursive' }}>{this.props.location.state.opponentName} </span>
                         </legend>
 
                         {this.state.opponentPiecesCaptured.length > 0 ?
                             (
                                 this.state.opponentPiecesCaptured.map((piece) => {
                                     return (
-                                        <Image src={piece} roundedCircle width="30" height="30" />
+                                        <Image src={piece} roundedCircle width='30' height='30' />
                                     )
                                 })
                             )
                             : <div style={{ color: 'rgba(1,1,1,0.3)' }}>Pieces captured</div>
                         }
-
-
                     </fieldset>
-
-
                 </div>
 
-                <div className="Game">
-                    <div className="Board">
+                <div className='Game'>
+                    <div className='Board'>
                         <Square
                             squares={this.state.squares}
                             move={this.move}
@@ -373,47 +360,42 @@ class ChessGame extends Component {
                     </div>
                 </div>
 
-                <Modal backdrop="static"
-                    aria-labelledby="contained-modal-title-vcenter"
+                <Modal backdrop='static'
+                    aria-labelledby='contained-modal-title-vcenter'
                     centered
                     keyboard={false}
                     show={this.state.showQuitModal || this.state.kingInCheckMate || this.state.draw || this.state.won}
                     onHide={this.hide}
-                    className="my-modal"
-                    size="lg"
+                    className='my-modal'
+                    size='lg'
                 >
-                    <Modal.Header closeButton hidden="true"></Modal.Header>
+                    <Modal.Header closeButton hidden='true'></Modal.Header>
                     <Modal.Body>
-                        <div style={{ textAlign: "center" }}>
+                        <div style={{ textAlign: 'center' }}>
                             <h4>{'GAME OVER!' + (this.state.showQuitModal && !this.state.kingInCheckMate && !this.state.draw && !this.state.won ? ' Opponent Quit' : (this.state.kingInCheckMate ? ' Your King has been captured' : (this.state.draw ? ' DRAW' : ' YOU WON !!')))}</h4>
                             <Button onClick={this.redirect} className='button' style={{ backgroundColor: 'black', border: '1px solid black', width: '150px', marginTop: '20px' }}>HOME</Button>
                         </div>
                     </Modal.Body>
                 </Modal>
 
-                <Modal backdrop="static"
-                    aria-labelledby="contained-modal-title-vcenter"
+                <Modal backdrop='static'
+                    aria-labelledby='contained-modal-title-vcenter'
                     centered
                     keyboard={false}
                     show={this.state.showPieceSwapModal}
                     onHide={this.hide}
-                    className="my-modal"
-                    size="lg"
+                    className='my-modal'
+                    size='lg'
                 >
-                    <Modal.Header closeButton hidden="true"></Modal.Header>
+                    <Modal.Header closeButton hidden='true'></Modal.Header>
                     <Modal.Body>
-                        <div style={{ textAlign: "center" }}>
+                        <div style={{ textAlign: 'center' }}>
                             <h4>Select the piece to swap</h4>
                             {
                                 pieceArray.map((piece, index) => {
                                     return (
-                                        <span style={{
-                                            display: 'inline-block',
-                                            height: '20vh',
-                                            width: '20vh',
-                                            border: '3px solid black'
-                                        }} onClick={() => this.swapPiece(piece, index)}>
-                                            <img style={{ height: '20vh' }} src={piece} alt="piece" />
+                                        <span className='piece-box' onClick={() => this.swapPiece(piece, index)}>
+                                            <img style={{ height: '20vh' }} src={piece} alt='piece' />
                                         </span>
                                     )
                                 })

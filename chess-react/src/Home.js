@@ -46,7 +46,7 @@ class Home extends Component {
         console.log(this.props.user)
         this.socket = new WebSocket('wss://'+ HOSTNAME + '/online/' + this.state.id) //CHANGE before commit
         this.socket.onopen = () => {
-            console.log("socket connected");
+            console.log('socket connected');
         }
 
         this.socket.onclose = () => {
@@ -74,7 +74,7 @@ class Home extends Component {
     createGame = () => {
         this.socket = new WebSocket('wss://'+ HOSTNAME + '/create/' + this.state.id) //CHANGE before commit
         this.socket.onopen = () => {
-            console.log("socket connected");
+            console.log('socket connected');
         }
 
         this.socket.onclose = () => {
@@ -112,7 +112,7 @@ class Home extends Component {
 
         this.socket = new WebSocket('wss://'+ HOSTNAME + '/join/' + this.state.id + '/' + this.joinGameId.current.value) //CHANGE before commit
         this.socket.onopen = () => {
-            console.log("socket connected");
+            console.log('socket connected');
         }
 
         this.socket.onclose = () => {
@@ -188,47 +188,44 @@ class Home extends Component {
                         <div><Button onClick={this.showJoin} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>JOIN ROOM</Button></div>
                     </div>
                 </div>
-                <Modal backdrop="static"
-                    aria-labelledby="contained-modal-title-vcenter"
+                <Modal backdrop='static'
+                    aria-labelledby='contained-modal-title-vcenter'
                     centered
                     keyboard={false}
                     show={this.state.waiting}
                     onHide={this.hide}
-                    className="my-modal"
+                    className='my-modal'
                 >
-                    <Modal.Header closeButton hidden="true"></Modal.Header>
+                    <Modal.Header closeButton hidden='true'></Modal.Header>
                     <Modal.Body>
-                        <div style={{ textAlign: "center" }}>
+                        <div style={{ textAlign: 'center' }}>
                             <h4 style={{ marginBottom: '20px' }}>Searching for Opponent</h4>
                             <div>
-                                <Spinner animation="border" variant="light" />
+                                <Spinner animation='border' variant='light' />
                             </div>
                             <Button onClick={this.hide} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>CANCEL</Button>
                         </div>
                     </Modal.Body>
                 </Modal>
 
-                <Modal backdrop="static"
-                    aria-labelledby="contained-modal-title-vcenter"
+                <Modal backdrop='static'
+                    aria-labelledby='contained-modal-title-vcenter'
                     centered
                     keyboard={false}
                     show={this.state.join}
                     onHide={this.hideJoin}
-                    className="my-modal"
+                    className='my-modal'
                 >
-                    <Modal.Header closeButton hidden="true"></Modal.Header>
+                    <Modal.Header closeButton hidden='true'></Modal.Header>
                     <Modal.Body>
-                        <div style={{ textAlign: "center" }}>
-                            <Form.Control className={classNameText} ref={this.joinGameId} type="text" placeholder="Enter Room ID" />
+                        <div style={{ textAlign: 'center' }}>
+                            <Form.Control className={classNameText} ref={this.joinGameId} type='text' placeholder='Enter Room ID' />
                             <div className={className}>* Invalid Room ID</div>
                             <Button onClick={this.joinGame} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>OK</Button>
                             <Button onClick={this.hideJoin} className='button' style={{ backgroundColor: ' rgb(142, 68, 173)', border: '1px solid white', width: '150px', marginTop: '20px' }}>CANCEL</Button>
                         </div>
                     </Modal.Body>
                 </Modal>
-
-
-
             </div>
 
         )

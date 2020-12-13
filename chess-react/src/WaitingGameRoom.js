@@ -88,7 +88,7 @@ class WaitingGameRoom extends Component {
                     }} /> : null
                 }
 
-                <div style={{ position: 'fixed', left: '2%', top: '2%' }}>
+                <div className='home'>
                     <Image src={home} roundedCircle width="100" height="100" onClick={this.redirectToHome} style={{ cursor: 'pointer' }} />
                 </div>
                 <div className='waitingRoomText'>
@@ -102,20 +102,20 @@ class WaitingGameRoom extends Component {
                             <Button variant="outline-secondary light" onClick={() => { navigator.clipboard.writeText(this.props.location.state.gameId) }}>COPY</Button>
                         </InputGroup.Append>
                     </InputGroup>
-                    <h4 style={{ marginTop: '20px', color: 'rgb(192, 57, 43)', fontFamily: 'Rouge Script, cursive' }}>Share this ROOM ID with your friends and ask them to join</h4>
+                    <h4 className='cursive-text'>Share this ROOM ID with your friends and ask them to join</h4>
                 </div>
 
                 <div className='left-wait'>
                     <div className='image-wait'>
                         <img width='150' height='150' className='imageBorder' src={this.props.user.imageUrl} alt="white" />
-                        <h3 style={{ marginTop: '20px', color: 'rgb(192, 57, 43)', fontFamily: 'Rouge Script, cursive' }}>{this.props.user.username}</h3>
+                        <h3 className='cursive-text'>{this.props.user.username}</h3>
                     </div>
                 </div>
 
                 <div className='right-wait'>
                     <div className='image-wait'>
                         <img width='150' height='150' className='imageBorder' src={this.state.opponentImageUrl ? this.state.opponentImageUrl : questionmark} alt="white" />
-                        <h3 style={{ marginTop: '20px', color: 'rgb(192, 57, 43)', fontFamily: 'Rouge Script, cursive' }}>{this.state.opponentName}</h3>
+                        <h3 className='cursive-text'>{this.state.opponentName}</h3>
                     </div>
                 </div>
 

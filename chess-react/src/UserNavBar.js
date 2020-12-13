@@ -34,10 +34,7 @@ class UserNavBar extends Component {
                         <span className='floatLeft'>
                             <Image src={chesslogo} width="60"
                                 height="80" />
-                            <span style={{
-                                color: 'rgb(142, 68, 173)', fontSize: '40px',
-                                fontWeight: 'bold', marginLeft: '10px', fontFamily: 'Rouge Script, cursive'
-                            }}>
+                            <span className='nav-logo-text'>
                                 Chess O'Mania
                             </span>
                         </span>
